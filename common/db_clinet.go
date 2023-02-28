@@ -4,8 +4,8 @@ package common
 import (
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/xormplus/xorm"
 	"main/config"
+	"xorm.io/xorm"
 )
 
 var DBengine *xorm.Engine
