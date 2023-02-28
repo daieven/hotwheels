@@ -9,6 +9,7 @@ import (
 type Config struct {
 	App App `yaml:"app" json:"app"`
 	Log Log `yaml:"log" json:"log"`
+	Db  Db  `yaml:"db" json:"db"`
 }
 
 type App struct {
@@ -21,6 +22,12 @@ type Log struct {
 	MaxSize int    `yaml:"maxSize" json:"maxsize"`
 }
 
+type Db struct {
+	Mysql string `yaml:"mysql" json:"mysql"`
+}
+
+var _config *Config = nil
+
 func GetConfigData() *Config {
 	//导入配置文件
 	yamlFile, err := ioutil.ReadFile("./config/config.yaml")
@@ -28,12 +35,11 @@ func GetConfigData() *Config {
 		fmt.Println(err.Error())
 		panic(err)
 	}
-	var _config *Config = nil
+
 	//将配置文件读取到结构体中
 	err = yaml.Unmarshal(yamlFile, &_config)
 	if err != nil {
 		fmt.Println(err.Error())
 	}
 	return _config
-
 }

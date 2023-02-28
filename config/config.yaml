@@ -4,3 +4,6 @@ app:
 log:
   suffix: log
   maxSize: 5
+
+db:
+  mysql: root:root@tcp(127.0.0.1:3306)/data?charset=utf8mb4
