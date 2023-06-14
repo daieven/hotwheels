@@ -2,22 +2,23 @@ package common
 
 // the db init and create a db pool
 import (
-	"fmt"
-	_ "github.com/go-sql-driver/mysql"
+	"gorm.io/driver/mysql"
+
+	"gorm.io/gorm"
 	"main/config"
-	"xorm.io/xorm"
 )
 
-var DBengine *xorm.Engine
+var DBengine *gorm.DB
 
-func InitDB() {
+func InitDB() *gorm.DB {
 	var err error
 	conf := config.GetConfigData()
-	DBengine, err = xorm.NewEngine("mysql", conf.Db.Mysql)
-	if err != nil {
-		fmt.Printf("123")
-	}
-	DBengine.SetMaxOpenConns(100)
-	DBengine.SetMaxOpenConns(999)
 
+	DBengine, err := gorm.Open(mysql.Open(conf.Db.Mysql), &gorm.Config{})
+	//DBengine, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
+	if err != nil {
+		panic("failed to connect database")
+	}
+
+	return DBengine
 }
