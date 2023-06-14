@@ -10,11 +10,11 @@ import (
 func start() {
 
 	dbEngine := common.InitDB()
-	//tables := []interface{}{
-	//	&models.User{},
-	//}
-	//common.InitTable(dbEngin, tables)
-	dbEngine.AutoMigrate(&models.User{})
+	tables := []interface{}{
+		&models.User{},
+	}
+	common.InitTable(dbEngine, tables...)
+
 	common.Include(
 		user.Routers,
 	)

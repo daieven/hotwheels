@@ -40,6 +40,7 @@ func GetConfigData() *Config {
 	err = yaml.Unmarshal(yamlFile, &_config)
 	if err != nil {
 		fmt.Println(err.Error())
+		panic(err)
 	}
 	return _config
 }
