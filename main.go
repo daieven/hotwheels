@@ -4,10 +4,17 @@ import (
 	"main/api/user"
 	"main/common"
 	"main/config"
+	"main/models"
 )
 
 func start() {
-	common.InitDB()
+
+	dbEngine := common.InitDB()
+	//tables := []interface{}{
+	//	&models.User{},
+	//}
+	//common.InitTable(dbEngin, tables)
+	dbEngine.AutoMigrate(&models.User{})
 	common.Include(
 		user.Routers,
 	)
